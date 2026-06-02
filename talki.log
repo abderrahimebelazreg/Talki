@@ -431,3 +431,7 @@ sqlite3.IntegrityError: FOREIGN KEY constraint failed
 2026-06-02 22:05:05,834 INFO: 127.0.0.1 - - [02/Jun/2026 22:05:05] "POST /signup HTTP/1.1" 200 -
 2026-06-02 22:05:05,870 INFO: 127.0.0.1 - - [02/Jun/2026 22:05:05] "[36mGET /static/design-system.css HTTP/1.1[0m" 304 -
 2026-06-02 22:05:06,033 INFO: 127.0.0.1 - - [02/Jun/2026 22:05:06] "[36mGET /static/image/bg.jpg HTTP/1.1[0m" 304 -
+2026-06-02 22:40:35,443 INFO:  * Detected change in 'C:\\Users\\Admin\\Desktop\\Talki\\Talki\\app.py', reloading
+2026-06-02 22:40:35,500 INFO:  * Detected change in 'C:\\Users\\Admin\\Desktop\\Talki\\Talki\\app.py', reloading
+2026-06-02 22:40:35,599 INFO:  * Restarting with stat
+2026-06-02 22:40:35,639 INFO:  * Restarting with stat
