@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up | Talki</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='design-system.css') }}">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      min-height: 100vh;
+      overflow: hidden;
+      position: relative;
+      background: #060817;
+      color: white;
+    }
+
+    .background {
+      position: fixed;
+      inset: 0;
+      background: url("{{ url_for('static', filename='image/bg.jpg') }}") no-repeat center center;
+      background-size: cover;
+      z-index: 0;
+    }
+
+    .background::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(3, 7, 18, 0.7);
+      z-index: 1;
+    }
+
+    .page-container {
+      position: relative;
+      z-index: 10;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .signup-card {
+      width: min(100%, 980px);
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 24px;
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 28px;
+      box-shadow: 0 20px 80px rgba(0, 0, 0, 0.35);
+      overflow: hidden;
+    }
+
+    .hero-panel {
+      padding: 44px 32px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 24px;
+      background: linear-gradient(180deg, rgba(14, 34, 86, 0.9), rgba(10, 23, 47, 0.95));
+    }
+
+    .hero-panel h1 {
+      font-size: clamp(2rem, 3vw, 3.5rem);
+      line-height: 1.1;
+      letter-spacing: -0.04em;
+      max-width: 14ch;
+    }
+
+    .hero-panel h1 span {
+      color: #38bdf8;
+    }
+
+    .hero-panel p {
+      font-size: 0.95rem;
+      line-height: 1.8;
+      color: rgba(255, 255, 255, 0.75);
+      max-width: 34rem;
+    }
+
+    .feature-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      background: rgba(56, 189, 248, 0.08);
+      color: #dbeafe;
+      width: fit-content;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .hero-meta {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .avatar-stack {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .avatar-pill {
+      width: 42px;
+      height: 42px;
+      border-radius: 999px;
+      border: 2px solid rgba(255, 255, 255, 0.12);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.18);
+    }
+
+    .hero-note {
+      color: rgba(255, 255, 255, 0.65);
+      font-size: 0.88rem;
+    }
+
+    .form-panel {
+      padding: 36px 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .form-panel h2 {
+      font-size: 1.45rem;
+      margin-bottom: 8px;
+    }
+
+    .message {
+      padding: 14px 16px;
+      border-radius: 16px;
+      font-size: 0.85rem;
+      animation: slideIn 0.25s ease;
+    }
+
+    .message-error {
+      background: rgba(239, 68, 68, 0.16);
+      border: 1px solid rgba(239, 68, 68, 0.35);
+      color: #fecaca;
+    }
+
+    .message-notice {
+      background: rgba(56, 189, 248, 0.16);
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      color: #bfdbfe;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .form-label {
+      color: rgba(255, 255, 255, 0.78);
+      font-size: 0.8rem;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    .form-input {
+      width: 100%;
+      min-height: 44px;
+      padding: 14px 16px;
+      border-radius: 14px;
+      border: 1px solid rgba(148, 163, 184, 0.18);
+      background: rgba(15, 23, 42, 0.88);
+      color: #f8fafc;
+      font-size: 0.95rem;
+      transition: all 0.2s ease;
+    }
+
+    .form-input::placeholder {
+      color: rgba(255, 255, 255, 0.4);
+    }
+
+    .form-input:focus {
+      outline: none;
+      border-color: rgba(56, 189, 248, 0.9);
+      box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.14);
+      background: rgba(15, 23, 42, 0.96);
+    }
+
+    .button-primary {
+      width: 100%;
+      padding: 14px 18px;
+      border: none;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #0ea5e9, #38bdf8);
+      color: #020617;
+      font-size: 0.95rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .button-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 18px 35px rgba(56, 189, 248, 0.25);
+    }
+
+    .send-code-button {
+      min-width: 120px;
+      padding: 0 16px;
+      border: none;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.08);
+      color: #dbeafe;
+      font-size: 0.85rem;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+
+    .send-code-button:hover {
+      background: rgba(255, 255, 255, 0.14);
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 12px;
+      align-items: end;
+    }
+
+    .helper-note {
+      color: rgba(255, 255, 255, 0.68);
+      font-size: 0.84rem;
+    }
+
+    .bottom-note {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      justify-content: center;
+      color: rgba(203, 213, 225, 0.88);
+      font-size: 0.88rem;
+    }
+
+    .bottom-link {
+      color: #38bdf8;
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    .bottom-link:hover {
+      color: #7dd3fc;
+      text-decoration: underline;
+    }
+
+    @media (max-width: 860px) {
+      .signup-card {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-panel {
+        padding: 28px 24px;
+      }
+
+      .form-panel {
+        padding: 28px 24px;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .signup-card {
+        border-radius: 22px;
+        gap: 18px;
+      }
+
+      .hero-panel,
+      .form-panel {
+        padding: 22px;
+      }
+
+      .form-input {
+        min-height: 42px;
+      }
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    *:focus-visible {
+      outline: 2px solid rgba(56, 189, 248, 0.55);
+      outline-offset: 2px;
+    }
+  </style>
+</head>
+<body>
+  <div class="background"></div>
+
+  <div class="page-container">
+    <div class="signup-card">
+      <div class="hero-panel">
+        <span class="feature-pill">Welcome to Talki</span>
+        <h1>Join the conversation with ease</h1>
+        <p>Sign up to share posts, follow creators, and connect with a vibrant community. Your new Talki profile is just a few steps away.</p>
+
+        <div class="hero-meta">
+          <div class="avatar-stack">
+            <div class="avatar-pill" style="background: linear-gradient(135deg, #818cf8, #6366f1);"></div>
+            <div class="avatar-pill" style="background: linear-gradient(135deg, #f472b6, #ec4899);"></div>
+            <div class="avatar-pill" style="background: linear-gradient(135deg, #2dd4bf, #14b8a6);"></div>
+            <div class="avatar-pill" style="background: linear-gradient(135deg, #fbbf24, #f59e0b);"></div>
+          </div>
+          <p class="hero-note">Trusted by talkers, creators, and thinkers around the world.</p>
+        </div>
+      </div>
+
+      <div class="form-panel">
+        <h2>Create your Talki account</h2>
+
+        {% if error %}
+        <div class="message message-error">{{ error }}</div>
+        {% endif %}
+
+        {% if notice %}
+        <div class="message message-notice">{{ notice }}</div>
+        {% endif %}
+
+        <form method="post" id="signupForm">
+          <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
+
+          <div class="form-group">
+            <label for="name" class="form-label">Full name</label>
+            <input id="name" type="text" name="name" class="form-input" placeholder="Your name" value="{{ form_data.name or '' }}" required autocomplete="name">
+          </div>
+
+          <div class="form-group">
+            <label for="email" class="form-label">Email</label>
+            <div class="form-row">
+              <input id="email" type="email" name="email" class="form-input" placeholder="you@example.com" value="{{ form_data.email or '' }}" required autocomplete="email">
+              <button type="submit" name="action" value="send_code" class="send-code-button">Send Code</button>
+            </div>
+          </div>
+
+          {% if notice or form_data.email %}
+          <div class="form-group">
+            <label for="code" class="form-label">Verification code</label>
+            <input id="code" type="text" name="code" class="form-input" placeholder="123456" maxlength="6" value="{{ form_data.code or '' }}">
+            <p class="helper-note">Enter the 6-digit code we sent to your inbox.</p>
+          </div>
+          {% endif %}
+
+          <div class="form-group">
+            <label for="handle" class="form-label">Handle (@username)</label>
+            <input id="handle" type="text" name="handle" class="form-input" placeholder="yourhandle" value="{{ form_data.handle or '' }}" required autocomplete="username">
+          </div>
+
+          <div class="form-group">
+            <label for="password" class="form-label">Password</label>
+            <input id="password" type="password" name="password" class="form-input" placeholder="Create a password" required autocomplete="new-password">
+          </div>
+
+          <div class="form-group">
+            <label for="confirm_password" class="form-label">Confirm password</label>
+            <input id="confirm_password" type="password" name="confirm_password" class="form-input" placeholder="Confirm your password" required autocomplete="new-password">
+          </div>
+
+          <button type="submit" name="action" value="create_account" class="button-primary">Create Account</button>
+        </form>
+
+        <div class="bottom-note">
+          <span>Already have an account?</span>
+          <a href="{{ url_for('login') }}" class="bottom-link">Sign in</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('signupForm').addEventListener('submit', function() {
+      const submit = document.querySelector('.button-primary');
+      submit.disabled = true;
+      submit.textContent = 'Creating account...';
+    });
+
+    setTimeout(() => {
+      const messages = document.querySelectorAll('.message');
+      messages.forEach(msg => {
+        msg.style.animation = 'slideIn 0.25s ease reverse';
+        setTimeout(() => msg.remove(), 280);
+      });
+    }, 5000);
+  </script>
+</body>
+</html>

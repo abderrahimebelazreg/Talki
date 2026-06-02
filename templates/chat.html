@@ -1,0 +1,220 @@
+{% extends "base.html" %}
+{% set title = "Chat | Talki" %}
+
+{% block content %}
+<div class="chat-layout">
+  <!-- Sidebar -->
+  <aside class="chat-sidebar">
+    <div class="chat-sidebar-header">
+      <h2>Messages</h2>
+      <form method="get" action="{{ url_for('chat') }}">
+        <div class="relative">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16" style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--text-tertiary); pointer-events: none;"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input type="text" name="q" value="{{ search_query }}" placeholder="Search users..." class="input-field" style="padding-left: 36px; border-radius: var(--radius-full); font-size: var(--text-sm);">
+        </div>
+      </form>
+    </div>
+
+    <div class="chat-conversation-list">
+      {% if search_results %}
+      <div class="section-header" style="padding: var(--sp-2) var(--sp-3); margin-bottom: 0;">Search Results</div>
+      {% for user in search_results %}
+      <a href="{{ url_for('chat_start', user_id=user.id) }}" class="chat-conversation-item">
+        {% if user.avatar_path %}
+        <img src="{{ url_for('static', filename=user.avatar_path) }}" class="avatar avatar-sm" alt="">
+        {% else %}
+        <div class="avatar avatar-sm avatar-placeholder">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </div>
+        {% endif %}
+        <div class="convo-info">
+          <div class="convo-name">{{ user.name }}</div>
+          <div class="convo-last">@{{ user.handle }}</div>
+        </div>
+      </a>
+      {% endfor %}
+      <div style="height: 1px; background: var(--border); margin: var(--sp-3) 0;"></div>
+      {% endif %}
+
+      {% for convo in conversations %}
+      <a href="{{ url_for('chat', conversation_id=convo.id) }}" class="chat-conversation-item {{ 'active' if convo.active else '' }}">
+        {% if convo.avatar_path %}
+        <img src="{{ url_for('static', filename=convo.avatar_path) }}" class="avatar" alt="">
+        {% else %}
+        <div class="avatar avatar-placeholder">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </div>
+        {% endif %}
+        <div class="convo-info">
+          <div class="flex justify-between items-center">
+            <div class="convo-name">{{ convo.name }}</div>
+            <div class="convo-time">{{ convo.time }}</div>
+          </div>
+          <div class="convo-last">{{ convo.last }}</div>
+        </div>
+      </a>
+      {% endfor %}
+
+      {% if conversations|length == 0 and not search_results %}
+      <div class="empty-state" style="padding: var(--sp-8) var(--sp-4);">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="36" height="36" style="margin: 0 auto var(--sp-3); opacity: 0.3;"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        <p class="text-sm text-muted">No conversations yet. Search for someone to start chatting!</p>
+      </div>
+      {% endif %}
+    </div>
+  </aside>
+
+  <!-- Chat Area -->
+  <section class="chat-main">
+    {% if active_conversation_id and active_user %}
+    <!-- Chat Header -->
+    <div class="chat-header">
+      <div class="chat-header-info">
+        {% if active_user.avatar_path %}
+        <img src="{{ url_for('static', filename=active_user.avatar_path) }}" class="avatar" alt="">
+        {% else %}
+        <div class="avatar avatar-placeholder">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </div>
+        {% endif %}
+        <div>
+          <div class="font-semibold text-sm">{{ active_user.name }}</div>
+          <div class="text-xs {% if active_user_online %}text-success{% else %}text-faint{% endif %}">
+            {% if active_user_online %}<span class="online-dot"></span>{% endif %}
+            {{ active_user_status }}
+          </div>
+        </div>
+      </div>
+      <a href="{{ url_for('public_profile', handle=active_user.handle) }}" class="btn-icon" title="View profile">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      </a>
+    </div>
+
+    <!-- Messages -->
+    <div id="chat-messages" class="chat-messages">
+      {% if chat_notice %}
+      <div class="alert alert-info" style="margin: 0 auto; max-width: 300px;">{{ chat_notice }}</div>
+      {% endif %}
+      {% for msg in messages %}
+      <div class="message {{ 'message-sent' if msg.from_me else 'message-received' }}">
+        {{ msg.text }}
+        <div class="message-time">
+          {{ msg.time }}
+          {% if msg.show_meta and msg.status %}
+          <span style="margin-left: 4px; {% if msg.status == 'Seen' %}color: var(--accent);{% endif %}">{{ msg.status }}</span>
+          {% endif %}
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <!-- Input -->
+    <div class="chat-input-area">
+      <form method="post" action="{{ url_for('chat_send', conversation_id=active_conversation_id) }}" class="chat-input-form" id="chat-send-form">
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
+        <input type="text" name="message" class="input-field" placeholder="Type a message..." autocomplete="off" id="chat-message-input">
+        <button class="btn btn-primary" style="border-radius: var(--radius-full); padding: 10px 20px;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+        </button>
+      </form>
+    </div>
+
+    {% else %}
+    <!-- Empty State -->
+    <div class="flex items-center justify-center flex-col" style="flex: 1;">
+      <div class="empty-state">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="56" height="56" style="margin: 0 auto var(--sp-4); opacity: 0.2;"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        <p style="font-size: var(--text-base);">Select a conversation to start chatting</p>
+        <p class="text-sm text-faint mt-2">Or search for someone new</p>
+      </div>
+    </div>
+    {% endif %}
+  </section>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  // Auto-scroll to bottom
+  const chatContainer = document.getElementById('chat-messages');
+  if (chatContainer) {
+    chatContainer.scrollTop = chatContainer.scrollHeight;
+  }
+
+  // AJAX message sending
+  const chatForm = document.getElementById('chat-send-form');
+  const chatInput = document.getElementById('chat-message-input');
+  if (chatForm && chatInput) {
+    chatForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const message = chatInput.value.trim();
+      if (!message) return;
+
+      // Optimistic UI: add message immediately
+      const msgDiv = document.createElement('div');
+      msgDiv.className = 'message message-sent';
+      msgDiv.innerHTML = message + '<div class="message-time">Sending...</div>';
+      chatContainer.appendChild(msgDiv);
+      chatContainer.scrollTop = chatContainer.scrollHeight;
+      chatInput.value = '';
+      chatInput.focus();
+
+      try {
+        const response = await fetch(chatForm.action, {
+          method: 'POST',
+          headers: {
+            'X-Requested-With': 'XMLHttpRequest',
+            'Content-Type': 'application/x-www-form-urlencoded',
+          },
+          body: new URLSearchParams({
+            '_csrf_token': CSRF_TOKEN,
+            'message': message
+          })
+        });
+        if (response.ok) {
+          const data = await response.json();
+          const timeStr = new Date(data.created_at).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+          msgDiv.querySelector('.message-time').textContent = timeStr;
+        }
+      } catch (err) {
+        msgDiv.querySelector('.message-time').textContent = 'Failed to send';
+        msgDiv.querySelector('.message-time').style.color = 'var(--error)';
+      }
+    });
+  }
+
+  // Polling for new messages
+  {% if active_conversation_id %}
+  let lastMessageId = {{ messages[-1].id if messages else 0 }};
+  setInterval(async () => {
+    try {
+      const response = await fetch(`/chat/{{ active_conversation_id }}/messages?after_id=${lastMessageId}`);
+      if (!response.ok) return;
+      const data = await response.json();
+      if (data.messages && data.messages.length > 0) {
+        data.messages.forEach(msg => {
+          if (msg.id > lastMessageId) {
+            lastMessageId = msg.id;
+            if (!msg.from_me) {
+              const div = document.createElement('div');
+              div.className = 'message message-received';
+              div.innerHTML = msg.text + '<div class="message-time">' +
+                new Date(msg.created_at).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}) +
+                '</div>';
+              chatContainer.appendChild(div);
+              chatContainer.scrollTop = chatContainer.scrollHeight;
+            }
+          }
+        });
+      }
+      // Update status
+      const statusEl = document.querySelector('.chat-header .text-xs');
+      if (statusEl && data.other_status) {
+        statusEl.innerHTML = (data.other_online ? '<span class="online-dot"></span>' : '') + data.other_status;
+        statusEl.className = 'text-xs ' + (data.other_online ? 'text-success' : 'text-faint');
+      }
+    } catch (e) {}
+  }, 3000);
+  {% endif %}
+</script>
+{% endblock %}

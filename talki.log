@@ -1,0 +1,433 @@
+2026-03-15 00:41:35,287 INFO: Serving on http://0.0.0.0:8000
+2026-03-15 00:43:42,510 INFO: Serving on http://0.0.0.0:8000
+2026-03-15 00:44:05,704 INFO: Serving on http://0.0.0.0:8000
+2026-03-15 00:52:37,273 INFO: Admin login: admin
+2026-03-15 14:18:32,758 INFO: Serving on http://0.0.0.0:8000
+2026-03-15 14:22:18,419 INFO: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-03-15 14:22:18,419 INFO: [33mPress CTRL+C to quit[0m
+2026-03-15 14:22:43,887 ERROR: Exception on /posts/4/delete [POST]
+Traceback (most recent call last):
+  File "C:\Users\Admin\Desktop\web\Talki\.venv\lib\python3.12\site-packages\flask\app.py", line 1463, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Desktop\web\Talki\.venv\lib\python3.12\site-packages\flask\app.py", line 872, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Desktop\web\Talki\.venv\lib\python3.12\site-packages\flask\app.py", line 870, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Desktop\web\Talki\.venv\lib\python3.12\site-packages\flask\app.py", line 855, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Desktop\web\Copy of Talki\Talki\app.py", line 364, in wrapper
+    return view(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Desktop\web\Copy of Talki\Talki\app.py", line 2034, in delete_post
+    conn.execute("DELETE FROM posts WHERE id = ?", (post_id,))
+sqlite3.IntegrityError: FOREIGN KEY constraint failed
+2026-03-15 14:23:13,857 INFO: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-03-15 14:23:13,857 INFO: [33mPress CTRL+C to quit[0m
+2026-03-15 14:23:26,243 INFO: 127.0.0.1 - - [15/Mar/2026 14:23:26] "[32mGET /?id=b6fa58ca-ad6a-4895-b35e-ef9aea75751e&vscodeBrowserReqId=1773581006224 HTTP/1.1[0m" 302 -
+2026-03-15 14:23:26,284 INFO: 127.0.0.1 - - [15/Mar/2026 14:23:26] "GET /login HTTP/1.1" 200 -
+2026-03-15 14:23:26,370 INFO: 127.0.0.1 - - [15/Mar/2026 14:23:26] "GET /static/css/style.css HTTP/1.1" 200 -
+2026-03-15 14:24:20,045 INFO: 127.0.0.1 - - [15/Mar/2026 14:24:20] "[32mGET /?id=b6fa58ca-ad6a-4895-b35e-ef9aea75751e&vscodeBrowserReqId=1773581060034 HTTP/1.1[0m" 302 -
+2026-03-15 14:24:20,052 INFO: 127.0.0.1 - - [15/Mar/2026 14:24:20] "GET /login HTTP/1.1" 200 -
+2026-03-15 14:24:20,069 INFO: 127.0.0.1 - - [15/Mar/2026 14:24:20] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2026-03-15 14:24:45,276 INFO: Admin login: admin
+2026-03-15 14:25:28,297 ERROR: Exception on /admin/posts/4/delete [POST]
+Traceback (most recent call last):
+  File "C:\Users\Admin\Desktop\web\Talki\.venv\lib\python3.12\site-packages\flask\app.py", line 1463, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Desktop\web\Talki\.venv\lib\python3.12\site-packages\flask\app.py", line 872, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Desktop\web\Talki\.venv\lib\python3.12\site-packages\flask\app.py", line 870, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Desktop\web\Talki\.venv\lib\python3.12\site-packages\flask\app.py", line 855, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Desktop\web\Copy of Talki\Talki\app.py", line 374, in wrapper
+    return view(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Desktop\web\Copy of Talki\Talki\app.py", line 2415, in admin_delete_post
+    conn.execute("DELETE FROM posts WHERE id = ?", (post_id,))
+sqlite3.IntegrityError: FOREIGN KEY constraint failed
+2026-03-15 14:29:14,240 INFO: Serving on http://0.0.0.0:8000
+2026-03-15 14:29:33,414 INFO: Admin login: admin
+2026-03-15 14:31:30,208 INFO: Serving on http://0.0.0.0:8000
+2026-03-15 14:36:02,489 INFO: Serving on http://0.0.0.0:8000
+2026-03-15 14:36:55,519 INFO: Serving on http://0.0.0.0:8000
+2026-03-15 14:39:34,732 INFO: Serving on http://0.0.0.0:8000
+2026-03-15 14:39:40,874 INFO: 127.0.0.1 - - [15/Mar/2026 14:39:40] "[32mGET /?id=b6fa58ca-ad6a-4895-b35e-ef9aea75751e&vscodeBrowserReqId=1773581980856 HTTP/1.1[0m" 302 -
+2026-03-15 14:39:40,881 INFO: 127.0.0.1 - - [15/Mar/2026 14:39:40] "GET /login HTTP/1.1" 200 -
+2026-03-15 14:39:40,905 INFO: 127.0.0.1 - - [15/Mar/2026 14:39:40] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2026-03-15 14:41:56,350 INFO: Serving on http://0.0.0.0:8000
+2026-03-15 14:45:46,317 INFO: Serving on http://0.0.0.0:8000
+2026-03-15 14:54:23,543 INFO: Serving on http://0.0.0.0:8000
+2026-03-15 14:56:08,848 ERROR: Exception on /posts/4/delete [POST]
+Traceback (most recent call last):
+  File "C:\Users\Admin\Desktop\web\Talki\.venv\lib\python3.12\site-packages\flask\app.py", line 1463, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Desktop\web\Talki\.venv\lib\python3.12\site-packages\flask\app.py", line 872, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Desktop\web\Talki\.venv\lib\python3.12\site-packages\flask\app.py", line 870, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Desktop\web\Talki\.venv\lib\python3.12\site-packages\flask\app.py", line 855, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Desktop\web\Copy of Talki\Talki\app.py", line 364, in wrapper
+    return view(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Desktop\web\Copy of Talki\Talki\app.py", line 2034, in delete_post
+    conn.execute("DELETE FROM posts WHERE id = ?", (post_id,))
+sqlite3.IntegrityError: FOREIGN KEY constraint failed
+2026-03-15 15:00:23,236 INFO: Serving on http://0.0.0.0:8000
+2026-03-15 15:01:43,095 INFO: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-03-15 15:01:43,096 INFO: [33mPress CTRL+C to quit[0m
+2026-03-15 15:01:43,096 INFO:  * Restarting with stat
+2026-03-15 15:01:43,525 WARNING:  * Debugger is active!
+2026-03-15 15:01:43,532 INFO:  * Debugger PIN: 988-325-712
+2026-03-15 15:02:21,593 INFO: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-03-15 15:02:21,594 INFO: [33mPress CTRL+C to quit[0m
+2026-03-15 15:02:21,595 INFO:  * Restarting with stat
+2026-03-15 15:02:22,020 WARNING:  * Debugger is active!
+2026-03-15 15:02:22,025 INFO:  * Debugger PIN: 988-325-712
+2026-03-15 15:02:30,658 INFO: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-03-15 15:02:30,659 INFO: [33mPress CTRL+C to quit[0m
+2026-03-15 15:02:30,660 INFO:  * Restarting with stat
+2026-03-15 15:02:31,040 WARNING:  * Debugger is active!
+2026-03-15 15:02:31,046 INFO:  * Debugger PIN: 493-903-273
+2026-03-15 15:02:51,434 INFO: 127.0.0.1 - - [15/Mar/2026 15:02:51] "[32mGET / HTTP/1.1[0m" 302 -
+2026-03-15 15:02:51,719 INFO: 127.0.0.1 - - [15/Mar/2026 15:02:51] "GET /posts HTTP/1.1" 200 -
+2026-03-15 15:02:51,772 INFO: 127.0.0.1 - - [15/Mar/2026 15:02:51] "GET /static/css/style.css HTTP/1.1" 200 -
+2026-03-15 15:02:52,074 INFO: 127.0.0.1 - - [15/Mar/2026 15:02:52] "GET /static/uploads/avatars/6a00c4a22cd54f0eb900becea84f57db.png HTTP/1.1" 200 -
+2026-03-15 15:02:52,081 INFO: 127.0.0.1 - - [15/Mar/2026 15:02:52] "GET /static/uploads/965dd55f104d44adb09da5f6d9163c59.jpg HTTP/1.1" 200 -
+2026-03-15 15:02:52,088 INFO: 127.0.0.1 - - [15/Mar/2026 15:02:52] "[35m[1mGET /static/uploads/posts/224851adfc4e4f5d94bd1ec5f566037b.mp4 HTTP/1.1[0m" 206 -
+2026-03-15 15:02:52,197 INFO: 127.0.0.1 - - [15/Mar/2026 15:02:52] "GET /static/uploads/posts/77374264b9f54c6c8405177a62b7614c.jpg HTTP/1.1" 200 -
+2026-03-15 15:02:52,540 INFO: 127.0.0.1 - - [15/Mar/2026 15:02:52] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2026-03-15 15:02:56,155 ERROR: Exception on /posts/4/delete [POST]
+Traceback (most recent call last):
+  File "C:/Users/Admin/Desktop/web/Copy of Talki/Talki/.venv/lib/python3.12/site-packages/flask/app.py", line 1463, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:/Users/Admin/Desktop/web/Copy of Talki/Talki/.venv/lib/python3.12/site-packages/flask/app.py", line 872, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:/Users/Admin/Desktop/web/Copy of Talki/Talki/.venv/lib/python3.12/site-packages/flask/app.py", line 870, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:/Users/Admin/Desktop/web/Copy of Talki/Talki/.venv/lib/python3.12/site-packages/flask/app.py", line 855, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:/Users/Admin/Desktop/web/Copy of Talki/Talki/app.py", line 364, in wrapper
+    return view(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:/Users/Admin/Desktop/web/Copy of Talki/Talki/app.py", line 2034, in delete_post
+    post = conn.execute(
+sqlite3.IntegrityError: FOREIGN KEY constraint failed
+2026-03-15 15:02:56,161 INFO: 127.0.0.1 - - [15/Mar/2026 15:02:56] "[35m[1mPOST /posts/4/delete HTTP/1.1[0m" 500 -
+2026-03-15 15:03:24,747 INFO: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-03-15 15:03:24,747 INFO: [33mPress CTRL+C to quit[0m
+2026-03-15 15:03:24,748 INFO:  * Restarting with stat
+2026-03-15 15:03:25,108 WARNING:  * Debugger is active!
+2026-03-15 15:03:25,112 INFO:  * Debugger PIN: 493-903-273
+2026-03-15 15:04:00,695 ERROR: Exception on /posts/4/delete [POST]
+Traceback (most recent call last):
+  File "C:/Users/Admin/Desktop/web/Copy of Talki/Talki/.venv/lib/python3.12/site-packages/flask/app.py", line 1463, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:/Users/Admin/Desktop/web/Copy of Talki/Talki/.venv/lib/python3.12/site-packages/flask/app.py", line 872, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:/Users/Admin/Desktop/web/Copy of Talki/Talki/.venv/lib/python3.12/site-packages/flask/app.py", line 870, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:/Users/Admin/Desktop/web/Copy of Talki/Talki/.venv/lib/python3.12/site-packages/flask/app.py", line 855, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:/Users/Admin/Desktop/web/Copy of Talki/Talki/app.py", line 364, in wrapper
+    return view(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:/Users/Admin/Desktop/web/Copy of Talki/Talki/app.py", line 2034, in delete_post
+    post = conn.execute(
+sqlite3.IntegrityError: FOREIGN KEY constraint failed
+2026-03-15 15:04:00,696 INFO: 127.0.0.1 - - [15/Mar/2026 15:04:00] "[35m[1mPOST /posts/4/delete HTTP/1.1[0m" 500 -
+2026-03-15 15:04:03,753 INFO: 127.0.0.1 - - [15/Mar/2026 15:04:03] "GET /posts HTTP/1.1" 200 -
+2026-03-15 15:04:04,100 INFO: 127.0.0.1 - - [15/Mar/2026 15:04:04] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2026-03-15 15:04:04,103 INFO: 127.0.0.1 - - [15/Mar/2026 15:04:04] "[36mGET /static/uploads/965dd55f104d44adb09da5f6d9163c59.jpg HTTP/1.1[0m" 304 -
+2026-03-15 15:04:04,103 INFO: 127.0.0.1 - - [15/Mar/2026 15:04:04] "[36mGET /static/uploads/avatars/6a00c4a22cd54f0eb900becea84f57db.png HTTP/1.1[0m" 304 -
+2026-03-15 15:04:04,111 INFO: 127.0.0.1 - - [15/Mar/2026 15:04:04] "[35m[1mGET /static/uploads/posts/224851adfc4e4f5d94bd1ec5f566037b.mp4 HTTP/1.1[0m" 206 -
+2026-03-15 15:04:04,345 INFO: 127.0.0.1 - - [15/Mar/2026 15:04:04] "[36mGET /static/uploads/posts/77374264b9f54c6c8405177a62b7614c.jpg HTTP/1.1[0m" 304 -
+2026-03-15 15:04:12,370 INFO: 127.0.0.1 - - [15/Mar/2026 15:04:12] "GET /posts/2 HTTP/1.1" 200 -
+2026-03-15 15:04:12,716 INFO: 127.0.0.1 - - [15/Mar/2026 15:04:12] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2026-03-15 15:04:12,720 INFO: 127.0.0.1 - - [15/Mar/2026 15:04:12] "[36mGET /static/uploads/965dd55f104d44adb09da5f6d9163c59.jpg HTTP/1.1[0m" 304 -
+2026-03-15 15:04:12,968 INFO: 127.0.0.1 - - [15/Mar/2026 15:04:12] "[36mGET /static/uploads/posts/77374264b9f54c6c8405177a62b7614c.jpg HTTP/1.1[0m" 304 -
+2026-03-15 15:04:16,810 INFO: 127.0.0.1 - - [15/Mar/2026 15:04:16] "GET /posts HTTP/1.1" 200 -
+2026-03-15 15:04:17,153 INFO: 127.0.0.1 - - [15/Mar/2026 15:04:17] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2026-03-15 15:04:17,157 INFO: 127.0.0.1 - - [15/Mar/2026 15:04:17] "[36mGET /static/uploads/avatars/6a00c4a22cd54f0eb900becea84f57db.png HTTP/1.1[0m" 304 -
+2026-03-15 15:04:17,162 INFO: 127.0.0.1 - - [15/Mar/2026 15:04:17] "[36mGET /static/uploads/965dd55f104d44adb09da5f6d9163c59.jpg HTTP/1.1[0m" 304 -
+2026-03-15 15:04:17,404 INFO: 127.0.0.1 - - [15/Mar/2026 15:04:17] "[36mGET /static/uploads/posts/77374264b9f54c6c8405177a62b7614c.jpg HTTP/1.1[0m" 304 -
+2026-03-15 15:04:26,458 ERROR: Exception on /posts/4/delete [POST]
+Traceback (most recent call last):
+  File "C:/Users/Admin/Desktop/web/Copy of Talki/Talki/.venv/lib/python3.12/site-packages/flask/app.py", line 1463, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:/Users/Admin/Desktop/web/Copy of Talki/Talki/.venv/lib/python3.12/site-packages/flask/app.py", line 872, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:/Users/Admin/Desktop/web/Copy of Talki/Talki/.venv/lib/python3.12/site-packages/flask/app.py", line 870, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:/Users/Admin/Desktop/web/Copy of Talki/Talki/.venv/lib/python3.12/site-packages/flask/app.py", line 855, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:/Users/Admin/Desktop/web/Copy of Talki/Talki/app.py", line 364, in wrapper
+    return view(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:/Users/Admin/Desktop/web/Copy of Talki/Talki/app.py", line 2034, in delete_post
+    post = conn.execute(
+sqlite3.IntegrityError: FOREIGN KEY constraint failed
+2026-03-15 15:04:26,462 INFO: 127.0.0.1 - - [15/Mar/2026 15:04:26] "[35m[1mPOST /posts/4/delete HTTP/1.1[0m" 500 -
+2026-03-15 15:06:00,622 INFO: 127.0.0.1 - - [15/Mar/2026 15:06:00] "GET /posts HTTP/1.1" 200 -
+2026-03-15 15:06:00,866 INFO: 127.0.0.1 - - [15/Mar/2026 15:06:00] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2026-03-15 15:06:00,986 INFO: 127.0.0.1 - - [15/Mar/2026 15:06:00] "[36mGET /static/uploads/avatars/6a00c4a22cd54f0eb900becea84f57db.png HTTP/1.1[0m" 304 -
+2026-03-15 15:06:00,987 INFO: 127.0.0.1 - - [15/Mar/2026 15:06:00] "[36mGET /static/uploads/965dd55f104d44adb09da5f6d9163c59.jpg HTTP/1.1[0m" 304 -
+2026-03-15 15:06:01,003 INFO: 127.0.0.1 - - [15/Mar/2026 15:06:01] "[35m[1mGET /static/uploads/posts/224851adfc4e4f5d94bd1ec5f566037b.mp4 HTTP/1.1[0m" 206 -
+2026-03-15 15:06:01,085 INFO: 127.0.0.1 - - [15/Mar/2026 15:06:01] "[36mGET /static/uploads/posts/77374264b9f54c6c8405177a62b7614c.jpg HTTP/1.1[0m" 304 -
+2026-03-15 15:06:10,319 INFO: 127.0.0.1 - - [15/Mar/2026 15:06:10] "GET /posts HTTP/1.1" 200 -
+2026-03-15 15:06:10,672 INFO: 127.0.0.1 - - [15/Mar/2026 15:06:10] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2026-03-15 15:06:10,679 INFO: 127.0.0.1 - - [15/Mar/2026 15:06:10] "[36mGET /static/uploads/avatars/6a00c4a22cd54f0eb900becea84f57db.png HTTP/1.1[0m" 304 -
+2026-03-15 15:06:10,680 INFO: 127.0.0.1 - - [15/Mar/2026 15:06:10] "[36mGET /static/uploads/965dd55f104d44adb09da5f6d9163c59.jpg HTTP/1.1[0m" 304 -
+2026-03-15 15:06:10,925 INFO: 127.0.0.1 - - [15/Mar/2026 15:06:10] "[36mGET /static/uploads/posts/77374264b9f54c6c8405177a62b7614c.jpg HTTP/1.1[0m" 304 -
+2026-03-15 15:07:43,320 INFO: Serving on http://0.0.0.0:8000
+2026-03-15 15:08:26,611 INFO: 127.0.0.1 - - [15/Mar/2026 15:08:26] "GET /posts HTTP/1.1" 200 -
+2026-03-15 15:08:26,857 INFO: 127.0.0.1 - - [15/Mar/2026 15:08:26] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2026-03-15 15:08:26,958 INFO: 127.0.0.1 - - [15/Mar/2026 15:08:26] "[36mGET /static/uploads/avatars/6a00c4a22cd54f0eb900becea84f57db.png HTTP/1.1[0m" 304 -
+2026-03-15 15:08:26,962 INFO: 127.0.0.1 - - [15/Mar/2026 15:08:26] "[36mGET /static/uploads/965dd55f104d44adb09da5f6d9163c59.jpg HTTP/1.1[0m" 304 -
+2026-03-15 15:08:26,973 INFO: 127.0.0.1 - - [15/Mar/2026 15:08:26] "[33mGET /static/uploads/posts/224851adfc4e4f5d94bd1ec5f566037b.mp4 HTTP/1.1[0m" 404 -
+2026-03-15 15:08:26,991 INFO: 127.0.0.1 - - [15/Mar/2026 15:08:26] "[36mGET /static/uploads/posts/77374264b9f54c6c8405177a62b7614c.jpg HTTP/1.1[0m" 304 -
+2026-03-15 15:08:29,982 INFO: 127.0.0.1 - - [15/Mar/2026 15:08:29] "GET /posts HTTP/1.1" 200 -
+2026-03-15 15:08:30,325 INFO: 127.0.0.1 - - [15/Mar/2026 15:08:30] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2026-03-15 15:08:30,326 INFO: 127.0.0.1 - - [15/Mar/2026 15:08:30] "[36mGET /static/uploads/avatars/6a00c4a22cd54f0eb900becea84f57db.png HTTP/1.1[0m" 304 -
+2026-03-15 15:08:30,330 INFO: 127.0.0.1 - - [15/Mar/2026 15:08:30] "[36mGET /static/uploads/965dd55f104d44adb09da5f6d9163c59.jpg HTTP/1.1[0m" 304 -
+2026-03-15 15:08:30,345 INFO: 127.0.0.1 - - [15/Mar/2026 15:08:30] "[33mGET /static/uploads/posts/224851adfc4e4f5d94bd1ec5f566037b.mp4 HTTP/1.1[0m" 404 -
+2026-03-15 15:08:30,573 INFO: 127.0.0.1 - - [15/Mar/2026 15:08:30] "[36mGET /static/uploads/posts/77374264b9f54c6c8405177a62b7614c.jpg HTTP/1.1[0m" 304 -
+2026-03-15 15:11:21,217 INFO: 127.0.0.1 - - [15/Mar/2026 15:11:21] "[32mGET / HTTP/1.1[0m" 302 -
+2026-03-15 15:11:21,472 INFO: 127.0.0.1 - - [15/Mar/2026 15:11:21] "GET /posts HTTP/1.1" 200 -
+2026-03-15 15:11:21,528 INFO: 127.0.0.1 - - [15/Mar/2026 15:11:21] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2026-03-15 15:11:21,824 INFO: 127.0.0.1 - - [15/Mar/2026 15:11:21] "[33mGET /static/uploads/posts/224851adfc4e4f5d94bd1ec5f566037b.mp4 HTTP/1.1[0m" 404 -
+2026-03-15 15:11:21,825 INFO: 127.0.0.1 - - [15/Mar/2026 15:11:21] "[36mGET /static/uploads/965dd55f104d44adb09da5f6d9163c59.jpg HTTP/1.1[0m" 304 -
+2026-03-15 15:11:21,827 INFO: 127.0.0.1 - - [15/Mar/2026 15:11:21] "[36mGET /static/uploads/avatars/6a00c4a22cd54f0eb900becea84f57db.png HTTP/1.1[0m" 304 -
+2026-03-15 15:11:21,852 INFO: 127.0.0.1 - - [15/Mar/2026 15:11:21] "[36mGET /static/uploads/posts/77374264b9f54c6c8405177a62b7614c.jpg HTTP/1.1[0m" 304 -
+2026-03-15 15:11:47,044 INFO: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-03-15 15:11:47,044 INFO: [33mPress CTRL+C to quit[0m
+2026-03-15 15:11:47,045 INFO:  * Restarting with stat
+2026-03-15 15:11:47,393 WARNING:  * Debugger is active!
+2026-03-15 15:11:47,396 INFO:  * Debugger PIN: 493-903-273
+2026-03-15 15:11:52,083 INFO: 127.0.0.1 - - [15/Mar/2026 15:11:52] "GET /posts HTTP/1.1" 200 -
+2026-03-15 15:11:52,420 INFO: 127.0.0.1 - - [15/Mar/2026 15:11:52] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2026-03-15 15:11:52,429 INFO: 127.0.0.1 - - [15/Mar/2026 15:11:52] "[33mGET /static/uploads/posts/224851adfc4e4f5d94bd1ec5f566037b.mp4 HTTP/1.1[0m" 404 -
+2026-03-15 15:11:52,431 INFO: 127.0.0.1 - - [15/Mar/2026 15:11:52] "[36mGET /static/uploads/avatars/6a00c4a22cd54f0eb900becea84f57db.png HTTP/1.1[0m" 304 -
+2026-03-15 15:11:52,440 INFO: 127.0.0.1 - - [15/Mar/2026 15:11:52] "[36mGET /static/uploads/965dd55f104d44adb09da5f6d9163c59.jpg HTTP/1.1[0m" 304 -
+2026-03-15 15:11:52,672 INFO: 127.0.0.1 - - [15/Mar/2026 15:11:52] "[36mGET /static/uploads/posts/77374264b9f54c6c8405177a62b7614c.jpg HTTP/1.1[0m" 304 -
+2026-03-15 15:16:40,249 INFO: 127.0.0.1 - - [15/Mar/2026 15:16:40] "GET /settings HTTP/1.1" 200 -
+2026-03-15 15:16:40,486 INFO: 127.0.0.1 - - [15/Mar/2026 15:16:40] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2026-03-15 15:17:49,588 INFO: 127.0.0.1 - - [15/Mar/2026 15:17:49] "GET /profile HTTP/1.1" 200 -
+2026-03-15 15:17:49,813 INFO: 127.0.0.1 - - [15/Mar/2026 15:17:49] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2026-03-15 15:17:49,947 INFO: 127.0.0.1 - - [15/Mar/2026 15:17:49] "[36mGET /static/uploads/965dd55f104d44adb09da5f6d9163c59.jpg HTTP/1.1[0m" 304 -
+2026-03-15 15:17:49,949 INFO: 127.0.0.1 - - [15/Mar/2026 15:17:49] "[36mGET /static/uploads/avatars/6a00c4a22cd54f0eb900becea84f57db.png HTTP/1.1[0m" 304 -
+2026-03-15 15:18:25,690 INFO: 127.0.0.1 - - [15/Mar/2026 15:18:25] "GET /posts HTTP/1.1" 200 -
+2026-03-15 15:18:26,048 INFO: 127.0.0.1 - - [15/Mar/2026 15:18:26] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2026-03-15 15:18:26,050 INFO: 127.0.0.1 - - [15/Mar/2026 15:18:26] "[36mGET /static/uploads/965dd55f104d44adb09da5f6d9163c59.jpg HTTP/1.1[0m" 304 -
+2026-03-15 15:18:26,057 INFO: 127.0.0.1 - - [15/Mar/2026 15:18:26] "[33mGET /static/uploads/posts/224851adfc4e4f5d94bd1ec5f566037b.mp4 HTTP/1.1[0m" 404 -
+2026-03-15 15:18:26,059 INFO: 127.0.0.1 - - [15/Mar/2026 15:18:26] "[36mGET /static/uploads/avatars/6a00c4a22cd54f0eb900becea84f57db.png HTTP/1.1[0m" 304 -
+2026-03-15 15:18:26,299 INFO: 127.0.0.1 - - [15/Mar/2026 15:18:26] "[36mGET /static/uploads/posts/77374264b9f54c6c8405177a62b7614c.jpg HTTP/1.1[0m" 304 -
+2026-03-15 15:18:35,206 INFO: 127.0.0.1 - - [15/Mar/2026 15:18:35] "[32mPOST /posts/4/report HTTP/1.1[0m" 302 -
+2026-03-15 15:18:35,527 INFO: 127.0.0.1 - - [15/Mar/2026 15:18:35] "GET /posts HTTP/1.1" 200 -
+2026-03-15 15:18:35,773 INFO: 127.0.0.1 - - [15/Mar/2026 15:18:35] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2026-03-15 15:18:35,878 INFO: 127.0.0.1 - - [15/Mar/2026 15:18:35] "[36mGET /static/uploads/avatars/6a00c4a22cd54f0eb900becea84f57db.png HTTP/1.1[0m" 304 -
+2026-03-15 15:18:35,879 INFO: 127.0.0.1 - - [15/Mar/2026 15:18:35] "[36mGET /static/uploads/965dd55f104d44adb09da5f6d9163c59.jpg HTTP/1.1[0m" 304 -
+2026-03-15 15:18:35,895 INFO: 127.0.0.1 - - [15/Mar/2026 15:18:35] "[36mGET /static/uploads/posts/77374264b9f54c6c8405177a62b7614c.jpg HTTP/1.1[0m" 304 -
+2026-03-15 15:18:35,901 INFO: 127.0.0.1 - - [15/Mar/2026 15:18:35] "[33mGET /static/uploads/posts/224851adfc4e4f5d94bd1ec5f566037b.mp4 HTTP/1.1[0m" 404 -
+2026-03-15 15:18:43,632 INFO: 127.0.0.1 - - [15/Mar/2026 15:18:43] "[32mGET /admin HTTP/1.1[0m" 302 -
+2026-03-15 15:18:43,947 INFO: 127.0.0.1 - - [15/Mar/2026 15:18:43] "GET /admin/login HTTP/1.1" 200 -
+2026-03-15 15:18:44,192 INFO: 127.0.0.1 - - [15/Mar/2026 15:18:44] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2026-03-15 15:19:00,791 INFO: Admin login: admin
+2026-03-15 15:19:00,793 INFO: 127.0.0.1 - - [15/Mar/2026 15:19:00] "[32mPOST /admin/login HTTP/1.1[0m" 302 -
+2026-03-15 15:19:01,108 INFO: 127.0.0.1 - - [15/Mar/2026 15:19:01] "GET /admin/dashboard HTTP/1.1" 200 -
+2026-03-15 15:19:01,352 INFO: 127.0.0.1 - - [15/Mar/2026 15:19:01] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2026-03-15 15:19:12,591 INFO: 127.0.0.1 - - [15/Mar/2026 15:19:12] "GET /admin/reports HTTP/1.1" 200 -
+2026-03-15 15:19:12,931 INFO: 127.0.0.1 - - [15/Mar/2026 15:19:12] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2026-03-15 15:19:17,973 ERROR: Exception on /admin/posts/4/delete [POST]
+Traceback (most recent call last):
+  File "C:/Users/Admin/Desktop/web/Copy of Talki/Talki/.venv/lib/python3.12/site-packages/flask/app.py", line 1463, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:/Users/Admin/Desktop/web/Copy of Talki/Talki/.venv/lib/python3.12/site-packages/flask/app.py", line 872, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:/Users/Admin/Desktop/web/Copy of Talki/Talki/.venv/lib/python3.12/site-packages/flask/app.py", line 870, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:/Users/Admin/Desktop/web/Copy of Talki/Talki/.venv/lib/python3.12/site-packages/flask/app.py", line 855, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:/Users/Admin/Desktop/web/Copy of Talki/Talki/app.py", line 374, in wrapper
+    return view(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:/Users/Admin/Desktop/web/Copy of Talki/Talki/app.py", line 2415, in admin_delete_post
+    FROM reports r
+sqlite3.IntegrityError: FOREIGN KEY constraint failed
+2026-03-15 15:19:17,981 INFO: 127.0.0.1 - - [15/Mar/2026 15:19:17] "[35m[1mPOST /admin/posts/4/delete HTTP/1.1[0m" 500 -
+2026-03-15 22:23:00,201 INFO: 127.0.0.1 - - [15/Mar/2026 22:23:00] "[32mGET / HTTP/1.1[0m" 302 -
+2026-03-15 22:23:00,451 INFO: 127.0.0.1 - - [15/Mar/2026 22:23:00] "GET /login HTTP/1.1" 200 -
+2026-03-15 22:23:00,531 INFO: 127.0.0.1 - - [15/Mar/2026 22:23:00] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2026-03-15 22:23:01,246 INFO: 127.0.0.1 - - [15/Mar/2026 22:23:01] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2026-03-16 14:54:55,430 INFO: Serving on http://0.0.0.0:8000
+2026-03-16 15:01:04,580 INFO: Admin login: admin
+2026-03-24 16:32:26,171 INFO: Serving on http://0.0.0.0:8000
+2026-03-24 17:07:01,209 INFO: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-03-24 17:07:01,209 INFO: [33mPress CTRL+C to quit[0m
+2026-03-24 17:07:01,211 INFO:  * Restarting with stat
+2026-03-24 17:07:01,611 WARNING:  * Debugger is active!
+2026-03-24 17:07:01,614 INFO:  * Debugger PIN: 988-360-561
+2026-03-24 17:09:39,244 INFO: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-03-24 17:09:39,244 INFO: [33mPress CTRL+C to quit[0m
+2026-03-24 17:09:39,245 INFO:  * Restarting with stat
+2026-03-24 17:09:39,636 WARNING:  * Debugger is active!
+2026-03-24 17:09:39,639 INFO:  * Debugger PIN: 988-360-561
+2026-03-24 17:09:53,998 INFO: 127.0.0.1 - - [24/Mar/2026 17:09:53] "GET /posts HTTP/1.1" 200 -
+2026-03-24 17:09:54,252 INFO: 127.0.0.1 - - [24/Mar/2026 17:09:54] "GET /static/css/style.css HTTP/1.1" 200 -
+2026-03-24 17:09:54,373 INFO: 127.0.0.1 - - [24/Mar/2026 17:09:54] "GET /static/uploads/965dd55f104d44adb09da5f6d9163c59.jpg HTTP/1.1" 200 -
+2026-03-24 17:09:54,377 INFO: 127.0.0.1 - - [24/Mar/2026 17:09:54] "GET /static/uploads/avatars/6a00c4a22cd54f0eb900becea84f57db.png HTTP/1.1" 200 -
+2026-03-24 17:09:54,430 INFO: 127.0.0.1 - - [24/Mar/2026 17:09:54] "GET /static/uploads/posts/77374264b9f54c6c8405177a62b7614c.jpg HTTP/1.1" 200 -
+2026-03-24 17:09:54,541 INFO: 127.0.0.1 - - [24/Mar/2026 17:09:54] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2026-03-24 17:09:54,862 INFO: 127.0.0.1 - - [24/Mar/2026 17:09:54] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2026-03-24 17:13:44,350 INFO: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-03-24 17:13:44,350 INFO: [33mPress CTRL+C to quit[0m
+2026-03-24 17:13:44,351 INFO:  * Restarting with stat
+2026-03-24 17:13:44,791 WARNING:  * Debugger is active!
+2026-03-24 17:13:44,795 INFO:  * Debugger PIN: 988-360-561
+2026-03-24 17:13:48,238 INFO: 127.0.0.1 - - [24/Mar/2026 17:13:48] "GET /posts HTTP/1.1" 200 -
+2026-03-24 17:13:48,459 INFO: 127.0.0.1 - - [24/Mar/2026 17:13:48] "GET /static/css/style.css HTTP/1.1" 200 -
+2026-03-24 17:13:48,605 INFO: 127.0.0.1 - - [24/Mar/2026 17:13:48] "[33mGET /script.js HTTP/1.1[0m" 404 -
+2026-03-24 17:13:48,621 INFO: 127.0.0.1 - - [24/Mar/2026 17:13:48] "[36mGET /static/uploads/avatars/6a00c4a22cd54f0eb900becea84f57db.png HTTP/1.1[0m" 304 -
+2026-03-24 17:13:48,637 INFO: 127.0.0.1 - - [24/Mar/2026 17:13:48] "[36mGET /static/uploads/965dd55f104d44adb09da5f6d9163c59.jpg HTTP/1.1[0m" 304 -
+2026-03-24 17:13:48,644 INFO: 127.0.0.1 - - [24/Mar/2026 17:13:48] "[36mGET /static/uploads/posts/77374264b9f54c6c8405177a62b7614c.jpg HTTP/1.1[0m" 304 -
+2026-03-24 17:13:48,712 INFO: 127.0.0.1 - - [24/Mar/2026 17:13:48] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2026-03-24 17:13:56,421 INFO: 127.0.0.1 - - [24/Mar/2026 17:13:56] "GET /posts HTTP/1.1" 200 -
+2026-03-24 17:13:56,805 INFO: 127.0.0.1 - - [24/Mar/2026 17:13:56] "[33mGET /script.js HTTP/1.1[0m" 404 -
+2026-03-24 17:13:56,812 INFO: 127.0.0.1 - - [24/Mar/2026 17:13:56] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2026-03-24 17:13:56,814 INFO: 127.0.0.1 - - [24/Mar/2026 17:13:56] "[36mGET /static/uploads/965dd55f104d44adb09da5f6d9163c59.jpg HTTP/1.1[0m" 304 -
+2026-03-24 17:13:56,821 INFO: 127.0.0.1 - - [24/Mar/2026 17:13:56] "[36mGET /static/uploads/avatars/6a00c4a22cd54f0eb900becea84f57db.png HTTP/1.1[0m" 304 -
+2026-03-24 17:13:56,836 INFO: 127.0.0.1 - - [24/Mar/2026 17:13:56] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2026-03-24 17:13:57,071 INFO: 127.0.0.1 - - [24/Mar/2026 17:13:57] "[36mGET /static/uploads/posts/77374264b9f54c6c8405177a62b7614c.jpg HTTP/1.1[0m" 304 -
+2026-03-24 17:14:19,112 INFO: 127.0.0.1 - - [24/Mar/2026 17:14:19] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2026-03-24 17:14:19,475 INFO: 127.0.0.1 - - [24/Mar/2026 17:14:19] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2026-03-24 17:15:03,745 INFO: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-03-24 17:15:03,746 INFO: [33mPress CTRL+C to quit[0m
+2026-03-24 17:15:03,747 INFO:  * Restarting with stat
+2026-03-24 17:15:04,155 WARNING:  * Debugger is active!
+2026-03-24 17:15:04,158 INFO:  * Debugger PIN: 988-360-561
+2026-03-24 17:15:06,894 INFO: 127.0.0.1 - - [24/Mar/2026 17:15:06] "GET /posts HTTP/1.1" 200 -
+2026-03-24 17:15:07,153 INFO: 127.0.0.1 - - [24/Mar/2026 17:15:07] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2026-03-24 17:15:07,257 INFO: 127.0.0.1 - - [24/Mar/2026 17:15:07] "[33mGET /script.js HTTP/1.1[0m" 404 -
+2026-03-24 17:15:07,259 INFO: 127.0.0.1 - - [24/Mar/2026 17:15:07] "[36mGET /static/uploads/965dd55f104d44adb09da5f6d9163c59.jpg HTTP/1.1[0m" 304 -
+2026-03-24 17:15:07,269 INFO: 127.0.0.1 - - [24/Mar/2026 17:15:07] "[36mGET /static/uploads/avatars/6a00c4a22cd54f0eb900becea84f57db.png HTTP/1.1[0m" 304 -
+2026-03-24 17:15:07,281 INFO: 127.0.0.1 - - [24/Mar/2026 17:15:07] "[36mGET /static/uploads/posts/77374264b9f54c6c8405177a62b7614c.jpg HTTP/1.1[0m" 304 -
+2026-03-24 17:15:07,313 INFO: 127.0.0.1 - - [24/Mar/2026 17:15:07] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2026-03-24 17:15:43,999 INFO: Serving on http://0.0.0.0:8000
+2026-03-24 17:21:21,087 INFO: Serving on http://0.0.0.0:8000
+2026-03-24 17:36:32,144 INFO: Serving on http://0.0.0.0:8000
+2026-03-24 17:41:28,636 INFO: Serving on http://0.0.0.0:8000
+2026-03-24 17:44:37,144 INFO: Serving on http://0.0.0.0:8000
+2026-03-24 20:14:36,739 INFO: Serving on http://0.0.0.0:8000
+2026-03-24 20:24:43,261 INFO: Serving on http://0.0.0.0:8000
+2026-04-09 22:15:56,316 INFO: Serving on http://0.0.0.0:8000
+2026-04-13 18:19:33,149 INFO: Serving on http://0.0.0.0:8000
+2026-04-23 11:36:11,771 INFO: Serving on http://0.0.0.0:8000
+2026-06-02 21:49:22,339 INFO: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-06-02 21:49:22,339 INFO: [33mPress CTRL+C to quit[0m
+2026-06-02 21:49:22,341 INFO:  * Restarting with stat
+2026-06-02 21:49:22,695 WARNING:  * Debugger is active!
+2026-06-02 21:49:22,702 INFO:  * Debugger PIN: 671-195-515
+2026-06-02 21:51:51,768 INFO: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-06-02 21:51:51,768 INFO: [33mPress CTRL+C to quit[0m
+2026-06-02 21:51:51,769 INFO:  * Restarting with stat
+2026-06-02 21:51:52,131 WARNING:  * Debugger is active!
+2026-06-02 21:51:52,135 INFO:  * Debugger PIN: 671-195-515
+2026-06-02 21:54:29,043 INFO: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-06-02 21:54:29,044 INFO: [33mPress CTRL+C to quit[0m
+2026-06-02 21:54:29,045 INFO:  * Restarting with stat
+2026-06-02 21:54:29,421 WARNING:  * Debugger is active!
+2026-06-02 21:54:29,433 INFO:  * Debugger PIN: 671-195-515
+2026-06-02 21:54:45,938 INFO: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-06-02 21:54:45,938 INFO: [33mPress CTRL+C to quit[0m
+2026-06-02 21:54:45,939 INFO:  * Restarting with stat
+2026-06-02 21:54:46,348 WARNING:  * Debugger is active!
+2026-06-02 21:54:46,354 INFO:  * Debugger PIN: 671-195-515
+2026-06-02 21:57:25,117 INFO: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-06-02 21:57:25,117 INFO: [33mPress CTRL+C to quit[0m
+2026-06-02 21:57:25,118 INFO:  * Restarting with stat
+2026-06-02 21:57:25,471 WARNING:  * Debugger is active!
+2026-06-02 21:57:25,475 INFO:  * Debugger PIN: 671-195-515
+2026-06-02 21:57:32,617 INFO: 127.0.0.1 - - [02/Jun/2026 21:57:32] "[32mGET / HTTP/1.1[0m" 302 -
+2026-06-02 21:57:32,640 INFO: 127.0.0.1 - - [02/Jun/2026 21:57:32] "GET /login HTTP/1.1" 200 -
+2026-06-02 21:57:32,862 INFO: 127.0.0.1 - - [02/Jun/2026 21:57:32] "GET /static/design-system.css HTTP/1.1" 200 -
+2026-06-02 21:57:32,928 INFO: 127.0.0.1 - - [02/Jun/2026 21:57:32] "GET /static/image/bg.jpg HTTP/1.1" 200 -
+2026-06-02 21:57:33,228 INFO: 127.0.0.1 - - [02/Jun/2026 21:57:33] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2026-06-02 21:57:35,343 INFO: 127.0.0.1 - - [02/Jun/2026 21:57:35] "GET /signup HTTP/1.1" 200 -
+2026-06-02 21:57:35,569 INFO: 127.0.0.1 - - [02/Jun/2026 21:57:35] "GET /static/tailwind.css HTTP/1.1" 200 -
+2026-06-02 21:57:35,631 INFO: 127.0.0.1 - - [02/Jun/2026 21:57:35] "[36mGET /static/design-system.css HTTP/1.1[0m" 304 -
+2026-06-02 21:57:35,632 INFO: 127.0.0.1 - - [02/Jun/2026 21:57:35] "GET /static/components.css HTTP/1.1" 200 -
+2026-06-02 21:57:35,638 INFO: 127.0.0.1 - - [02/Jun/2026 21:57:35] "GET /static/components.js HTTP/1.1" 200 -
+2026-06-02 21:59:25,616 INFO: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-06-02 21:59:25,616 INFO: [33mPress CTRL+C to quit[0m
+2026-06-02 21:59:25,618 INFO:  * Restarting with stat
+2026-06-02 21:59:25,975 WARNING:  * Debugger is active!
+2026-06-02 21:59:25,979 INFO:  * Debugger PIN: 671-195-515
+2026-06-02 21:59:28,698 INFO: 127.0.0.1 - - [02/Jun/2026 21:59:28] "GET /signup HTTP/1.1" 200 -
+2026-06-02 21:59:28,727 INFO: 127.0.0.1 - - [02/Jun/2026 21:59:28] "[36mGET /static/design-system.css HTTP/1.1[0m" 304 -
+2026-06-02 21:59:28,886 INFO: 127.0.0.1 - - [02/Jun/2026 21:59:28] "[36mGET /static/image/bg.jpg HTTP/1.1[0m" 304 -
+2026-06-02 21:59:35,206 INFO: 127.0.0.1 - - [02/Jun/2026 21:59:35] "GET /login HTTP/1.1" 200 -
+2026-06-02 21:59:35,274 INFO: 127.0.0.1 - - [02/Jun/2026 21:59:35] "[36mGET /static/design-system.css HTTP/1.1[0m" 304 -
+2026-06-02 21:59:35,407 INFO: 127.0.0.1 - - [02/Jun/2026 21:59:35] "[36mGET /static/image/bg.jpg HTTP/1.1[0m" 304 -
+2026-06-02 22:01:21,362 INFO: 127.0.0.1 - - [02/Jun/2026 22:01:21] "[31m[1mPOST /login HTTP/1.1[0m" 400 -
+2026-06-02 22:01:31,779 INFO: 127.0.0.1 - - [02/Jun/2026 22:01:31] "[31m[1mPOST /login HTTP/1.1[0m" 400 -
+2026-06-02 22:01:37,844 INFO: 127.0.0.1 - - [02/Jun/2026 22:01:37] "GET /signup HTTP/1.1" 200 -
+2026-06-02 22:01:37,869 INFO: 127.0.0.1 - - [02/Jun/2026 22:01:37] "[36mGET /static/design-system.css HTTP/1.1[0m" 304 -
+2026-06-02 22:01:38,139 INFO: 127.0.0.1 - - [02/Jun/2026 22:01:38] "[36mGET /static/image/bg.jpg HTTP/1.1[0m" 304 -
+2026-06-02 22:02:15,998 INFO: 127.0.0.1 - - [02/Jun/2026 22:02:15] "POST /signup HTTP/1.1" 200 -
+2026-06-02 22:02:16,029 INFO: 127.0.0.1 - - [02/Jun/2026 22:02:16] "[36mGET /static/design-system.css HTTP/1.1[0m" 304 -
+2026-06-02 22:02:16,284 INFO: 127.0.0.1 - - [02/Jun/2026 22:02:16] "[36mGET /static/image/bg.jpg HTTP/1.1[0m" 304 -
+2026-06-02 22:04:18,169 INFO: 127.0.0.1 - - [02/Jun/2026 22:04:18] "POST /signup HTTP/1.1" 200 -
+2026-06-02 22:04:18,212 INFO: 127.0.0.1 - - [02/Jun/2026 22:04:18] "[36mGET /static/design-system.css HTTP/1.1[0m" 304 -
+2026-06-02 22:04:18,223 INFO: 127.0.0.1 - - [02/Jun/2026 22:04:18] "[36mGET /static/image/bg.jpg HTTP/1.1[0m" 304 -
+2026-06-02 22:04:22,068 INFO: 127.0.0.1 - - [02/Jun/2026 22:04:22] "POST /signup HTTP/1.1" 200 -
+2026-06-02 22:04:22,097 INFO: 127.0.0.1 - - [02/Jun/2026 22:04:22] "[36mGET /static/design-system.css HTTP/1.1[0m" 304 -
+2026-06-02 22:04:22,265 INFO: 127.0.0.1 - - [02/Jun/2026 22:04:22] "[36mGET /static/image/bg.jpg HTTP/1.1[0m" 304 -
+2026-06-02 22:05:05,834 INFO: 127.0.0.1 - - [02/Jun/2026 22:05:05] "POST /signup HTTP/1.1" 200 -
+2026-06-02 22:05:05,870 INFO: 127.0.0.1 - - [02/Jun/2026 22:05:05] "[36mGET /static/design-system.css HTTP/1.1[0m" 304 -
+2026-06-02 22:05:06,033 INFO: 127.0.0.1 - - [02/Jun/2026 22:05:06] "[36mGET /static/image/bg.jpg HTTP/1.1[0m" 304 -

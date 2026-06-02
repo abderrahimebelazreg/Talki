@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% set title = "Reports | Talki Admin" %}
+
+{% block content %}
+<div style="max-width: 800px;">
+  <div class="flex items-center justify-between mb-6">
+    <h1 style="font-size: var(--text-2xl); font-weight: 800;">Open Reports</h1>
+    <a href="{{ url_for('admin_dashboard') }}" class="btn btn-ghost btn-sm">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+      Dashboard
+    </a>
+  </div>
+
+  <div class="space-y-4">
+    {% for report in reports %}
+    <div class="card report-card" style="animation-delay: {{ loop.index0 * 50 }}ms;">
+      <div class="flex justify-between items-start" style="flex-wrap: wrap; gap: var(--sp-3);">
+        <div style="flex: 1; min-width: 200px;">
+          <div class="flex items-center gap-2 mb-2">
+            <span style="display: inline-flex; align-items: center; gap: 4px; padding: 2px 10px; border-radius: var(--radius-full); background: var(--error-bg); color: var(--error); font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>
+              {{ report.reason }}
+            </span>
+          </div>
+          <div class="text-sm text-muted mb-1">Reported by <strong>@{{ report.reporter_handle }}</strong></div>
+          {% if report.details %}
+          <div class="text-sm" style="color: var(--text-secondary);">{{ report.details }}</div>
+          {% endif %}
+        </div>
+        <div class="flex gap-2">
+          <form method="post" action="{{ url_for('admin_delete_post', post_id=report.post_id) }}" onsubmit="return confirm('Delete this post permanently?')">
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
+            <button class="btn btn-danger btn-sm">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+              Delete Post
+            </button>
+          </form>
+          <form method="post" action="{{ url_for('admin_dismiss_report', report_id=report.id) }}">
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
+            <button class="btn btn-secondary btn-sm">Dismiss</button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Reported Content Preview -->
+      <div style="margin-top: var(--sp-4); padding: var(--sp-4); background: rgba(255,255,255,0.02); border: 1px solid var(--border); border-radius: var(--radius-md);">
+        <div class="text-xs text-faint uppercase tracking-wide mb-2" style="letter-spacing: 0.05em;">Post Content</div>
+        <div class="text-sm" style="color: var(--text-secondary);">{{ report.post_content }}</div>
+      </div>
+    </div>
+    {% else %}
+    <div class="card empty-state">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="48" height="48" style="margin: 0 auto var(--sp-4); opacity: 0.3;"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+      <p>No open reports. Everything looks good!</p>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

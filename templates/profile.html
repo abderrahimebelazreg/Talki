@@ -1,0 +1,184 @@
+{% extends "base.html" %}
+{% set title = "Profile | Talki" %}
+
+{% block content %}
+<div class="space-y-6">
+  {% if profile_error %}
+  <div class="alert alert-error">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+    {{ profile_error }}
+  </div>
+  {% endif %}
+  {% if profile_notice %}
+  <div class="alert alert-success">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+    {{ profile_notice }}
+  </div>
+  {% endif %}
+
+  <!-- Profile Header -->
+  <section class="card" style="padding: 0; overflow: hidden;">
+    <div class="profile-cover"></div>
+    <div class="profile-header">
+      <div class="flex items-end justify-between" style="flex-wrap: wrap; gap: var(--sp-4);">
+        <div class="flex items-end gap-4">
+          {% if user and user.avatar_path %}
+          <img src="{{ url_for('static', filename=user.avatar_path) }}" class="profile-avatar" alt="">
+          {% else %}
+          <div class="profile-avatar flex items-center justify-center" style="background: linear-gradient(135deg, var(--primary), var(--secondary));">
+            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" width="40" height="40"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          </div>
+          {% endif %}
+          <div style="margin-bottom: var(--sp-2);">
+            <h1 style="font-size: var(--text-xl); font-weight: 700;">{{ user.name }}</h1>
+            <div class="text-sm text-muted">@{{ user.handle }}</div>
+          </div>
+        </div>
+        <button class="btn btn-secondary" onclick="document.getElementById('edit-profile-modal').classList.remove('hidden')" style="margin-bottom: var(--sp-2);">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+          Edit Profile
+        </button>
+      </div>
+
+      <div style="margin-top: var(--sp-4); padding-bottom: var(--sp-6);">
+        <p style="font-size: var(--text-sm); color: var(--text-secondary); line-height: 1.6;">{{ user.bio or "No bio yet. Tell people about yourself!" }}</p>
+        <div class="flex gap-4 mt-3 text-xs text-faint" style="flex-wrap: wrap;">
+          <span class="flex items-center gap-1">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            Joined {{ joined_date }}
+          </span>
+          {% if user.share_link %}
+          <a href="{{ share_url }}" target="_blank" class="link-accent flex items-center gap-1">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+            {{ user.share_link }}
+          </a>
+          {% endif %}
+        </div>
+
+        <div class="profile-stats">
+          <div class="stat-item">
+            <div class="stat-value">{{ posts_count }}</div>
+            <div class="stat-label">Posts</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value">{{ followers_count }}</div>
+            <div class="stat-label">Followers</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value">{{ following_count }}</div>
+            <div class="stat-label">Following</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Content Grid -->
+  <div class="grid-layout">
+    <div class="space-y-4">
+      <div class="section-header">Recent Posts</div>
+      {% if recent_posts|length == 0 %}
+      <div class="card empty-state" style="padding: var(--sp-8);">
+        <p class="text-sm text-muted">No posts yet.</p>
+      </div>
+      {% endif %}
+      {% for post in recent_posts %}
+      <div class="card" style="animation-delay: {{ loop.index0 * 50 }}ms;">
+        <div class="text-xs text-faint mb-2">{{ post.created_at }}</div>
+        <div class="text-sm" style="line-height: 1.6;">{{ post.content }}</div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <div class="space-y-4">
+      <div class="section-header">Following</div>
+      <div class="card">
+        {% for follow in following_list %}
+        <div class="user-row" style="display: flex; align-items: center; justify-content: space-between; padding: var(--sp-3) 0; {% if not loop.last %}border-bottom: 1px solid var(--border);{% endif %}">
+          <div class="user-info">
+            <a href="{{ url_for('public_profile', handle=follow.handle) }}">
+              {% if follow.avatar_path %}
+              <img src="{{ url_for('static', filename=follow.avatar_path) }}" class="avatar avatar-sm" alt="">
+              {% else %}
+              <div class="avatar avatar-sm avatar-placeholder" style="font-size: 10px;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              </div>
+              {% endif %}
+            </a>
+            <div>
+              <a href="{{ url_for('public_profile', handle=follow.handle) }}" class="text-sm font-semibold">{{ follow.name }}</a>
+              <div class="text-xs text-faint">@{{ follow.handle }}</div>
+            </div>
+          </div>
+          <form method="post" action="{{ url_for('unfollow', user_id=follow.id) }}">
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
+            <button class="btn btn-ghost btn-xs text-muted">Unfollow</button>
+          </form>
+        </div>
+        {% else %}
+        <div class="text-sm text-muted" style="padding: var(--sp-2) 0;">Not following anyone yet.</div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Edit Profile Modal -->
+<div id="edit-profile-modal" class="modal hidden">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3>Edit Profile</h3>
+      <button class="btn-icon" onclick="document.getElementById('edit-profile-modal').classList.add('hidden')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <form method="post" action="{{ url_for('profile_update') }}" class="space-y-4">
+      <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
+      <div class="form-group">
+        <label class="form-label">Name</label>
+        <input type="text" name="name" value="{{ user.name }}" class="input-field">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Handle</label>
+        <input type="text" name="handle" value="{{ user.handle }}" class="input-field">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Bio</label>
+        <textarea name="bio" rows="3" class="input-field">{{ user.bio or '' }}</textarea>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Website</label>
+        <input type="text" name="share_link" value="{{ user.share_link or '' }}" class="input-field" placeholder="https://yourwebsite.com">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Hobbies</label>
+        <input type="text" name="hobbies" value="{{ user.hobbies or '' }}" class="input-field" placeholder="Reading, coding, gaming...">
+      </div>
+      <div class="flex justify-end gap-2">
+        <button type="button" class="btn btn-secondary" onclick="document.getElementById('edit-profile-modal').classList.add('hidden')">Cancel</button>
+        <button type="submit" class="btn btn-primary">Save Changes</button>
+      </div>
+    </form>
+
+    <div class="divider"></div>
+
+    <form method="post" action="{{ url_for('profile_upload') }}" enctype="multipart/form-data" class="flex items-center gap-4">
+      <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
+      <div style="flex: 1;">
+        <label class="form-label">Update avatar</label>
+        <input type="file" name="avatar" accept="image/*">
+      </div>
+      <button class="btn btn-secondary">Upload</button>
+    </form>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+// Close modal on backdrop click
+document.getElementById('edit-profile-modal')?.addEventListener('click', function(e) {
+    if (e.target === this) this.classList.add('hidden');
+});
+</script>
+{% endblock %}

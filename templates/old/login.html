@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% set title = "Log in | Talki" %}
+
+{% block content %}
+<div class="container" style="max-width: 960px;">
+<div class="auth-layout">
+  <!-- Hero Side -->
+  <div class="auth-hero">
+    <h1>
+      Welcome back to<br>
+      <span>Talki</span>
+    </h1>
+    <p>Connect with creators and communities in a safe, moderated space. Share your ideas, follow inspiring people, and join the conversation.</p>
+    <div class="auth-social-proof">
+      <div class="avatar-stack">
+        <div class="avatar" style="background: linear-gradient(135deg, #818cf8, #6366f1);"></div>
+        <div class="avatar" style="background: linear-gradient(135deg, #f472b6, #ec4899);"></div>
+        <div class="avatar" style="background: linear-gradient(135deg, #2dd4bf, #14b8a6);"></div>
+      </div>
+      <span class="text-sm"><strong class="text-primary-color">10,000+</strong> <span class="text-muted">creators joined this week</span></span>
+    </div>
+  </div>
+
+  <!-- Login Card -->
+  <div class="card auth-card">
+    <h2 style="font-size: var(--text-2xl); font-weight: 700; margin-bottom: var(--sp-6);">Sign in</h2>
+
+    {% if error %}
+    <div class="alert alert-error">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+      {{ error }}
+    </div>
+    {% endif %}
+
+    {% if notice %}
+    <div class="alert alert-success">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+      {{ notice }}
+    </div>
+    {% endif %}
+
+    <form method="post" class="space-y-4">
+      <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
+
+      <div class="form-group">
+        <label class="form-label">Email or handle</label>
+        <input type="text" name="email_or_handle" value="{{ email_or_handle }}" class="input-field" required placeholder="you@example.com">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Password</label>
+        <input type="password" name="password" class="input-field" required placeholder="Enter your password">
+      </div>
+
+      <div class="flex justify-between items-center">
+        <label class="flex items-center gap-2 text-sm text-muted" style="cursor: pointer;">
+          <input type="checkbox"> Remember me
+        </label>
+        <a href="{{ url_for('forgot_password') }}" class="link-accent text-sm">Forgot password?</a>
+      </div>
+
+      <button class="btn btn-primary w-full" style="margin-top: var(--sp-4); padding: 12px;">Sign In</button>
+    </form>
+
+    <div class="text-center text-sm text-muted" style="margin-top: var(--sp-6);">
+      Don't have an account? <a href="{{ url_for('signup') }}" class="link-primary">Create one</a>
+    </div>
+  </div>
+</div>
+</div>
+{% endblock %}

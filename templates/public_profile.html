@@ -1,0 +1,160 @@
+{% extends "base.html" %}
+{% set title = user.name ~ " (@" ~ user.handle ~ ") | Talki" %}
+
+{% block content %}
+<div class="space-y-6" style="max-width: 800px;">
+  <!-- Profile Header -->
+  <section class="card" style="padding: 0; overflow: hidden;">
+    <div class="profile-cover"></div>
+    <div class="profile-header">
+      <div class="flex items-end justify-between" style="flex-wrap: wrap; gap: var(--sp-4);">
+        <div class="flex items-end gap-4">
+          {% if user.avatar_path %}
+          <img src="{{ url_for('static', filename=user.avatar_path) }}" class="profile-avatar" alt="">
+          {% else %}
+          <div class="profile-avatar flex items-center justify-center" style="background: linear-gradient(135deg, var(--primary), var(--secondary));">
+            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" width="40" height="40"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          </div>
+          {% endif %}
+          <div style="margin-bottom: var(--sp-2);">
+            <h1 style="font-size: var(--text-xl); font-weight: 700;">{{ user.name }}</h1>
+            <div class="text-sm text-muted">@{{ user.handle }}</div>
+          </div>
+        </div>
+
+        {% if not is_self and current_user %}
+        <div class="flex items-center gap-2" style="margin-bottom: var(--sp-2);">
+          {% if is_following %}
+          <form method="post" action="{{ url_for('unfollow', user_id=user.id) }}">
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
+            <button class="btn btn-secondary btn-sm">Unfollow</button>
+          </form>
+          {% else %}
+          <form method="post" action="{{ url_for('follow', user_id=user.id) }}">
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
+            <button class="btn btn-primary btn-sm">Follow</button>
+          </form>
+          {% endif %}
+          <a href="{{ url_for('chat_start', user_id=user.id) }}" class="btn btn-secondary btn-sm">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            Message
+          </a>
+        </div>
+        {% elif not current_user %}
+        <a href="{{ url_for('login') }}" class="btn btn-primary btn-sm" style="margin-bottom: var(--sp-2);">Sign in to follow</a>
+        {% endif %}
+      </div>
+
+      <div style="margin-top: var(--sp-4); padding-bottom: var(--sp-6);">
+        <div class="flex gap-6 text-sm" style="flex-wrap: wrap;">
+          <span><strong>{{ posts_count }}</strong> <span class="text-muted">posts</span></span>
+          <span><strong>{{ followers_count }}</strong> <span class="text-muted">followers</span></span>
+          <span><strong>{{ following_count }}</strong> <span class="text-muted">following</span></span>
+        </div>
+
+        <p class="text-sm mt-3" style="color: var(--text-secondary); line-height: 1.6;">
+          {{ user.bio if user.bio else "This user hasn't added a bio yet." }}
+        </p>
+
+        <div class="flex gap-4 mt-3 text-xs text-faint" style="flex-wrap: wrap;">
+          {% if user.hobbies %}
+          <span>Hobbies: {{ user.hobbies }}</span>
+          {% endif %}
+          {% if user.share_link %}
+          <a href="{{ share_url }}" target="_blank" rel="noopener" class="link-accent">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12" style="display: inline; vertical-align: -1px;"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+            {{ user.share_link }}
+          </a>
+          {% endif %}
+          <span>Joined {{ joined_date if joined_date else "Unknown" }}</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Posts -->
+  <section class="card">
+    <div class="section-header">Posts</div>
+    {% if all_posts|length == 0 %}
+    <div class="empty-state" style="padding: var(--sp-8);">
+      <p class="text-sm text-muted">No posts yet.</p>
+    </div>
+    {% else %}
+    <div style="display: grid; gap: var(--sp-3); grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));">
+      {% for post in all_posts %}
+      <div style="background: rgba(255,255,255,0.02); border: 1px solid var(--border); border-radius: var(--radius-md); padding: var(--sp-4); transition: background 150ms;">
+        <div class="text-xs text-faint mb-2">{{ post.created_at }}</div>
+        <div class="text-sm" style="color: var(--text-secondary);">{{ post.content }}</div>
+      </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+  </section>
+
+  <!-- Media Gallery -->
+  {% if media_posts|length > 0 %}
+  <section class="card">
+    <div class="section-header">Media Gallery</div>
+    <div style="display: grid; gap: var(--sp-3); grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));">
+      {% for media in media_posts %}
+      {% if media.media_type == "video" %}
+      <video controls style="width: 100%; border-radius: var(--radius-md); border: 1px solid var(--border);">
+        <source src="{{ url_for('static', filename=media.media_path) }}" />
+      </video>
+      {% else %}
+      <img src="{{ url_for('static', filename=media.media_path) }}" alt="" loading="lazy" style="width: 100%; border-radius: var(--radius-md); border: 1px solid var(--border); object-fit: cover; aspect-ratio: 1;">
+      {% endif %}
+      {% endfor %}
+    </div>
+  </section>
+  {% endif %}
+
+  <!-- Followers -->
+  {% if followers_list|length > 0 %}
+  <section class="card">
+    <div class="section-header">Followers</div>
+    <div style="display: grid; gap: var(--sp-3); grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));">
+      {% for follow in followers_list %}
+      <a href="{{ url_for('public_profile', handle=follow.handle) }}" class="user-info" style="padding: var(--sp-3); border: 1px solid var(--border); border-radius: var(--radius-md); transition: background 150ms;">
+        {% if follow.avatar_path %}
+        <img src="{{ url_for('static', filename=follow.avatar_path) }}" class="avatar avatar-sm" alt="">
+        {% else %}
+        <div class="avatar avatar-sm avatar-placeholder">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </div>
+        {% endif %}
+        <div>
+          <div class="text-sm font-semibold">{{ follow.name }}</div>
+          <div class="text-xs text-faint">@{{ follow.handle }}</div>
+        </div>
+      </a>
+      {% endfor %}
+    </div>
+  </section>
+  {% endif %}
+
+  <!-- Following -->
+  {% if following_list|length > 0 %}
+  <section class="card">
+    <div class="section-header">Following</div>
+    <div style="display: grid; gap: var(--sp-3); grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));">
+      {% for follow in following_list %}
+      <a href="{{ url_for('public_profile', handle=follow.handle) }}" class="user-info" style="padding: var(--sp-3); border: 1px solid var(--border); border-radius: var(--radius-md); transition: background 150ms;">
+        {% if follow.avatar_path %}
+        <img src="{{ url_for('static', filename=follow.avatar_path) }}" class="avatar avatar-sm" alt="">
+        {% else %}
+        <div class="avatar avatar-sm avatar-placeholder">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </div>
+        {% endif %}
+        <div>
+          <div class="text-sm font-semibold">{{ follow.name }}</div>
+          <div class="text-xs text-faint">@{{ follow.handle }}</div>
+        </div>
+      </a>
+      {% endfor %}
+    </div>
+  </section>
+  {% endif %}
+</div>
+{% endblock %}

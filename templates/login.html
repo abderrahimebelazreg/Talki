@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign In | Talki</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='design-system.css') }}">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      min-height: 100vh;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Background with bg.jpg image */
+    .background {
+      position: fixed;
+      inset: 0;
+      background: url("{{ url_for('static', filename='image/bg.jpg') }}") no-repeat center center;
+      background-size: cover;
+      z-index: 0;
+    }
+
+    /* Optional dark overlay for better contrast */
+    .background::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.3);
+      z-index: 1;
+    }
+
+    /* Login container */
+    .login-container {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    /* Glass morphism card */
+    .login-card {
+      width: 100%;
+      max-width: 320px;
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-radius: 16px;
+      padding: 10px;
+      box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    /* Header */
+    .login-header {
+      padding: 10px;
+      text-align: center;
+    }
+
+    .login-title {
+      color: white;
+      font-size: 16px;
+      font-weight: 700;
+      margin: 0;
+    }
+
+    /* Form wrapper */
+    .form-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .form-content {
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    /* Form group */
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 8px;
+    }
+
+    .form-label {
+      color: white;
+      font-size: 9px;
+      font-weight: 400;
+      letter-spacing: 0.01em;
+    }
+
+    /* Input fields */
+    .form-input {
+      height: 28px;
+      padding: 10px;
+      background: rgba(2, 6, 23, 0.6);
+      border: 1px solid rgba(107, 114, 128, 0.5);
+      border-radius: 6px;
+      color: white;
+      font-size: 9px;
+      outline: none;
+      transition: all 0.2s ease;
+      width: 100%;
+    }
+
+    .form-input::placeholder {
+      color: rgba(255, 255, 255, 0.4);
+    }
+
+    .form-input:focus {
+      border-color: rgba(59, 130, 246, 0.8);
+      background: rgba(2, 6, 23, 0.7);
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    }
+
+    /* Password field with eye icon */
+    .password-wrapper {
+      position: relative;
+    }
+
+    .password-toggle {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 12px;
+      height: 10px;
+      border: 0.6px solid rgba(161, 161, 170, 1);
+      background: transparent;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255, 255, 255, 0.5);
+      font-size: 8px;
+      transition: opacity 0.2s;
+    }
+
+    .password-toggle:hover {
+      opacity: 0.8;
+    }
+
+    /* Remember me & Forgot password row */
+    .form-options {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .remember-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .checkbox {
+      width: 12px;
+      height: 12px;
+      border: 1px solid rgba(163, 163, 163, 1);
+      border-radius: 3px;
+      background: transparent;
+      cursor: pointer;
+      appearance: none;
+      -webkit-appearance: none;
+      position: relative;
+      transition: all 0.2s;
+    }
+
+    .checkbox:checked {
+      background: rgba(59, 130, 246, 0.8);
+      border-color: rgba(59, 130, 246, 1);
+    }
+
+    .checkbox:checked::after {
+      content: '✓';
+      position: absolute;
+      color: white;
+      font-size: 10px;
+      top: -2px;
+      left: 2px;
+    }
+
+    .remember-label {
+      color: white;
+      font-size: 10px;
+      font-weight: 400;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .forgot-link {
+      color: rgba(59, 130, 246, 1);
+      font-size: 10px;
+      font-weight: 400;
+      text-decoration: none;
+      transition: color 0.2s;
+      white-space: nowrap;
+    }
+
+    .forgot-link:hover {
+      color: rgba(96, 165, 250, 1);
+    }
+
+    /* Submit button */
+    .submit-wrapper {
+      padding: 10px;
+    }
+
+    .submit-button {
+      width: 100%;
+      height: 32px;
+      padding: 10px;
+      background: rgba(2, 6, 23, 0.6);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      border: none;
+      border-radius: 6px;
+      color: white;
+      font-size: 9px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .submit-button:hover {
+      background: rgba(2, 6, 23, 0.8);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    .submit-button:active {
+      transform: translateY(0);
+    }
+
+    /* Signup link */
+    .signup-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 2px;
+      padding: 0 10px 10px;
+    }
+
+    .signup-text {
+      color: rgba(161, 161, 170, 1);
+      font-size: 9px;
+      font-weight: 400;
+    }
+
+    .signup-link {
+      color: rgba(34, 211, 238, 1);
+      font-size: 9px;
+      font-weight: 400;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .signup-link:hover {
+      color: rgba(103, 232, 249, 1);
+      text-decoration: underline;
+    }
+
+    /* Error/Notice messages */
+    .message {
+      padding: 8px 10px;
+      border-radius: 6px;
+      font-size: 9px;
+      margin-bottom: 8px;
+      animation: slideIn 0.3s ease;
+    }
+
+    .message-error {
+      background: rgba(239, 68, 68, 0.15);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      color: rgba(252, 165, 165, 1);
+    }
+
+    .message-notice {
+      background: rgba(34, 211, 238, 0.15);
+      border: 1px solid rgba(34, 211, 238, 0.3);
+      color: rgba(103, 232, 249, 1);
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 480px) {
+      .login-card {
+        max-width: 100%;
+      }
+    }
+
+    /* Loading state */
+    .submit-button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    /* Focus visible for accessibility */
+    *:focus-visible {
+      outline: 2px solid rgba(59, 130, 246, 0.6);
+      outline-offset: 2px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Background with bg.jpg -->
+  <div class="background"></div>
+
+  <!-- Login container -->
+  <div class="login-container">
+    <div class="login-card">
+      <!-- Header -->
+      <div class="login-header">
+        <h1 class="login-title">sign in</h1>
+      </div>
+
+      <!-- Form -->
+      <div class="form-wrapper">
+        <div class="form-content">
+          <!-- Error message -->
+          {% if error %}
+          <div class="message message-error">
+            {{ error }}
+          </div>
+          {% endif %}
+
+          <!-- Notice message -->
+          {% if notice %}
+          <div class="message message-notice">
+            {{ notice }}
+          </div>
+          {% endif %}
+
+          <form method="post" id="loginForm">
+            <!-- Email/Username field -->
+            <div class="form-group">
+              <label for="email_or_handle" class="form-label">Email or username</label>
+              <input 
+                type="text" 
+                id="email_or_handle"
+                name="email_or_handle"
+                class="form-input" 
+                placeholder="you@gmail.com"
+                value="{{ email_or_handle or '' }}"
+                required
+                autocomplete="username"
+              >
+            </div>
+
+            <!-- Password field -->
+            <div class="form-group">
+              <label for="password" class="form-label">Password</label>
+              <div class="password-wrapper">
+                <input 
+                  type="password" 
+                  id="password"
+                  name="password"
+                  class="form-input" 
+                  placeholder="••••••••"
+                  required
+                  autocomplete="current-password"
+                >
+                <button 
+                  type="button" 
+                  class="password-toggle" 
+                  aria-label="Toggle password visibility"
+                  onclick="togglePassword()"
+                  title="Show/Hide password"
+                >
+                  👁
+                </button>
+              </div>
+            </div>
+
+            <!-- Remember me & Forgot password -->
+            <div class="form-options">
+              <div class="remember-wrapper">
+                <input 
+                  type="checkbox" 
+                  id="remember" 
+                  name="remember"
+                  class="checkbox"
+                >
+                <label for="remember" class="remember-label">Remember me</label>
+              </div>
+              <a href="{{ url_for('forgot_password') }}" class="forgot-link">Forgot password?</a>
+            </div>
+          </form>
+        </div>
+
+        <!-- Submit button -->
+        <div class="submit-wrapper">
+          <button type="submit" class="submit-button" form="loginForm">
+            Sign In
+          </button>
+        </div>
+
+        <!-- Signup link -->
+        <div class="signup-wrapper">
+          <span class="signup-text">Don't have an account?</span>
+          <a href="{{ url_for('signup') }}" class="signup-link">Create one</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Toggle password visibility
+    function togglePassword() {
+      const passwordInput = document.getElementById('password');
+      const toggleBtn = document.querySelector('.password-toggle');
+      
+      if (passwordInput.type === 'password') {
+        passwordInput.type = 'text';
+        toggleBtn.textContent = '👁️';
+        toggleBtn.style.opacity = '1';
+      } else {
+        passwordInput.type = 'password';
+        toggleBtn.textContent = '👁';
+        toggleBtn.style.opacity = '0.5';
+      }
+    }
+
+    // Add loading state on form submit
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+      const submitBtn = document.querySelector('.submit-button');
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Signing in...';
+    });
+
+    // Auto-hide messages after 5 seconds
+    setTimeout(() => {
+      const messages = document.querySelectorAll('.message');
+      messages.forEach(msg => {
+        msg.style.animation = 'slideIn 0.3s ease reverse';
+        setTimeout(() => msg.remove(), 300);
+      });
+    }, 5000);
+  </script>
+</body>
+</html>
